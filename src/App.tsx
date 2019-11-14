@@ -454,7 +454,30 @@ class App extends React.Component<any, any> {
     }
   };
 
-  public testCustomRequest = async (customRequest: IJsonRpcRequest) => {
+  public testCustomRequest = async () => {
+    const customRequest: IJsonRpcRequest = {
+      'id': 12374,
+      'jsonrpc': '2.0',
+      'method': 'gs_multi_send',
+      'params': [
+        {
+          'to': '0x05c85Ab5B09Eb8A55020d72daf6091E04e264af9',
+          'value': '100000000000000000'
+        },
+        {
+          'to': '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
+          'data': '0xa9059cbb00000000000000000000000005c85Ab5B09Eb8A55020d72daf6091E04e264af90000000000000000000000000000000000000000000000000de0b6b3a7640000'
+        },/*
+        {
+          'to': '0x1f6AD913fC2c8053Ed2951cA257e62f3c36b9874',
+          'data': '0x7de7edef00000000000000000000000005c85Ab5B09Eb8A55020d72daf6091E04e264af9' // Change master copy
+        },
+        {
+          'to': '0x1f6AD913fC2c8053Ed2951cA257e62f3c36b9874',
+          'data': '0x610b592500000000000000000000000005c85Ab5B09Eb8A55020d72daf6091E04e264af9' // Enable module
+        }*/
+      ]
+    }
     const { walletConnector } = this.state;
 
     if (!walletConnector) {
@@ -727,7 +750,7 @@ class App extends React.Component<any, any> {
                       {"eth_signTransaction"}
                     </STestButton>
 
-                    <STestButton disabled left onClick={this.testCustomRequest}>
+                    <STestButton left onClick={this.testCustomRequest}>
                       {"Custom Request"}
                     </STestButton>
 
