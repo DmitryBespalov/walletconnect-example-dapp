@@ -62,6 +62,7 @@ const SConnectButton = styled(Button)`
   height: 44px;
   width: 100%;
   margin: 12px 0;
+  background-color: #008c73;
 `;
 
 const SContainer = styled.div`
@@ -190,10 +191,12 @@ class App extends React.Component<any, any> {
       // console log the uri for development
       console.log(uri); // tslint:disable-line
 
+      window.open(uri)
+
       // display QR Code modal
-      WalletConnectQRCodeModal.open(uri, () => {
-        console.log("QR Code Modal closed"); // tslint:disable-line
-      });
+      // WalletConnectQRCodeModal.open(uri, () => {
+      //   console.log("QR Code Modal closed"); // tslint:disable-line
+      // });
     }
     // subscribe to events
     await this.subscribeToEvents();
@@ -300,7 +303,7 @@ class App extends React.Component<any, any> {
     }
   };
 
-  public toggleModal = () =>
+  public toggleModal = () => 
     this.setState({ showModal: !this.state.showModal });
 
   public testSendTransaction = async () => {
@@ -308,7 +311,7 @@ class App extends React.Component<any, any> {
 
     if (!walletConnector) {
       return;
-    }
+    }    
 
     // from
     const from = address;
@@ -316,6 +319,7 @@ class App extends React.Component<any, any> {
     // to
     const to = address;
 
+    window.open("https://safe.gnosis.io/")
     // nonce
     const _nonce = await apiGetAccountNonce(address, chainId);
     const nonce = sanitizeHex(convertStringToHex(_nonce));
@@ -355,7 +359,6 @@ class App extends React.Component<any, any> {
 
       // toggle pending request indicator
       this.setState({ pendingRequest: true });
-
       // send transaction
       const result = await walletConnector.sendTransaction(tx);
 
@@ -392,6 +395,8 @@ class App extends React.Component<any, any> {
 
     // to
     const to = address;
+
+    window.open("https://safe.gnosis.io/")
 
     // nonce
     const _nonce = await apiGetAccountNonce(address, chainId);
@@ -455,6 +460,8 @@ class App extends React.Component<any, any> {
   };
 
   public testCustomRequest = async () => {
+    window.open("https://safe.gnosis.io/")
+
     const customRequest: IJsonRpcRequest = {
       'id': 12374,
       'jsonrpc': '2.0',
@@ -462,20 +469,24 @@ class App extends React.Component<any, any> {
       'params': [
         {
           'to': '0x05c85Ab5B09Eb8A55020d72daf6091E04e264af9',
-          'value': '100000000000000000'
+          'value': '0'
         },
         {
-          'to': '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
-          'data': '0xa9059cbb00000000000000000000000005c85Ab5B09Eb8A55020d72daf6091E04e264af90000000000000000000000000000000000000000000000000de0b6b3a7640000'
-        },/*
-        {
-          'to': '0x1f6AD913fC2c8053Ed2951cA257e62f3c36b9874',
-          'data': '0x7de7edef00000000000000000000000005c85Ab5B09Eb8A55020d72daf6091E04e264af9' // Change master copy
-        },
-        {
-          'to': '0x1f6AD913fC2c8053Ed2951cA257e62f3c36b9874',
-          'data': '0x610b592500000000000000000000000005c85Ab5B09Eb8A55020d72daf6091E04e264af9' // Enable module
-        }*/
+          'to': '0x05c85Ab5B09Eb8A55020d72daf6091E04e264af9',
+          'value': '1'
+        }// ,
+        // {
+        //   'to': '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
+        //   'data': '0xa9059cbb00000000000000000000000005c85Ab5B09Eb8A55020d72daf6091E04e264af90000000000000000000000000000000000000000000000000de0b6b3a7640000'
+        // },/*
+        // {
+        //   'to': '0x1f6AD913fC2c8053Ed2951cA257e62f3c36b9874',
+        //   'data': '0x7de7edef00000000000000000000000005c85Ab5B09Eb8A55020d72daf6091E04e264af9' // Change master copy
+        // },
+        // {
+        //   'to': '0x1f6AD913fC2c8053Ed2951cA257e62f3c36b9874',
+        //   'data': '0x610b592500000000000000000000000005c85Ab5B09Eb8A55020d72daf6091E04e264af9' // Enable module
+        // }*/
       ]
     }
     const { walletConnector } = this.state;
@@ -519,6 +530,7 @@ class App extends React.Component<any, any> {
       return;
     }
 
+    
     // test message
     const message = "My email is john@doe.com - 1537836206101";
 
@@ -528,6 +540,7 @@ class App extends React.Component<any, any> {
     // eth_sign params
     const msgParams = [address, hash];
 
+    window.open("https://safe.gnosis.io/")
     try {
       // open modal
       this.toggleModal();
@@ -579,6 +592,7 @@ class App extends React.Component<any, any> {
     // personal_sign params
     const msgParams = [hexMsg, address];
 
+    window.open("https://safe.gnosis.io/")
     try {
       // open modal
       this.toggleModal();
@@ -621,6 +635,7 @@ class App extends React.Component<any, any> {
       return;
     }
 
+    window.open("https://safe.gnosis.io/")
     // typed data
     const typedData = {
       types: {
@@ -732,7 +747,7 @@ class App extends React.Component<any, any> {
                     onClick={this.walletConnectInit}
                     fetching={fetching}
                   >
-                    {"Connect to WalletConnect"}
+                    {"Connect to Gnosis Safe"}
                   </SConnectButton>
                 </SButtonContainer>
               </SLanding>
